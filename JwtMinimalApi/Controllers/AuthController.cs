@@ -35,4 +35,17 @@ public class AuthController : ControllerBase
     {
         return Ok($"Welcome!!!");
     }
+
+
+    [HttpPost("validate-token")]
+    public IActionResult ValidateTokenManually([FromBody] string token, JwtTokenGenerator jwtTokenGenerator)
+    {
+        var principal = jwtTokenGenerator.ValidateToken(token);
+        if (principal == null)
+            return Unauthorized("Token is invalid or expired");
+
+        var username = principal.Identity!.Name;
+        return Ok($"Token is valid. Hello, {username}!");
+    }
+
 }
