@@ -31,7 +31,7 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpGet("welcome")]
-    public IActionResult GetSecret()
+    public IActionResult GetWelcomeMessage()
     {
         return Ok($"Welcome!!!");
     }
